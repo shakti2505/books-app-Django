@@ -1,0 +1,10 @@
+{% extends 'books/base.html' %}
+
+{% block body %}
+
+<h3>You Have been logged out!</h3>
+<a class="btn btn-outline-primary" href="{% url 'login'%}">Login Again</a>
+
+<a class="btn btn-outline-primary" href="{% url 'register'%}">Signup</a>
+
+{% endblock %}

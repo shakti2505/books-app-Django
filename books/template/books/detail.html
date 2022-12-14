@@ -1,0 +1,23 @@
+{% extends 'books/base.html' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="{{book.book_image}}" class="card"/>
+        </div>
+        <div class="col-md-6">
+            <h1>{{book.book_title}}</h1>
+            <h2>By {{book.book_author}}</h2>
+            <h4>{{book.book_desc}}</h4>
+            <h5>${{book.book_price}}</h5>
+            <h6>Rating: {{book.book_rating}}</h6>
+            <a class="btn btn-outline-success" href="{% url 'books:index' %}">Home</a>
+            <a class="btn btn-outline-primary" href="{% url 'books:update' book.id %}">Edit Book</a>
+            <a class="btn btn-outline-danger" href="{% url 'books:delete' book.id %}">Delete Book</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

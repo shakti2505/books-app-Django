@@ -1,0 +1,89 @@
+{% extends 'books/base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    {% block body %}
+    <!-- Search BAR -->
+    {% if user.is_authenticated %}
+    <form class="d-flex" role="search" method="get" action="{% url 'books:search' %}">
+        <input class="form-control me-2" type="search" placeholder="Search by book title" aria-label="Search" name="q"
+            style="border: 2px solid black">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <!-- Search BAR -->
+
+    <!-- login Message -->
+    <div class="alert alert-success" role="alert">
+        Hi {{user}}, You are Logged in!
+    </div>
+    {% endif%}
+    <!-- login Message -->
+
+    <!-- book list view -->
+    {% if user.is_authenticated %}
+
+    {% for book in book_list %}
+
+    <div class="row">
+        <div class="col-md-3 offset-md-2">
+            <img class="card" height="150px" src="{{book.book_image}}" alt="">
+        </div>
+        <div class="col-md-4">
+            <h3>{{book.book_title}}</h3>
+            <h4>By {{book.book_author}}</h4>
+            <h6>Added by {{book.user_name}}</h6>
+
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-outline-info" href="{% url 'books:detail' book.id %}">Details</a>
+
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <!-- book list view -->
+
+
+    <br>
+    <!-- paginator -->
+    {% if user.is_authenticated %}
+
+    <nav aria-label="Page navigation example" class="offset-md-5">
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            </li>
+            {% endif %}
+            <span class="current">
+                <h5>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. </h5>
+            </span>
+
+            {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    <!-- paginator -->
+
+    {% endblock %}
+
+</body>
+
+</html>

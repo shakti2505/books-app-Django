@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 
 router  = DefaultRouter()
-router.register('crud',views.BookViewSet, basename='book')
+router.register('bookdatabase',views.BookViewSet, basename='book')
 
 
 urlpatterns = [

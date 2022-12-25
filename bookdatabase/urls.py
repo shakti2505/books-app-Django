@@ -23,6 +23,7 @@ from django.contrib.auth import views as authentications_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', include('books.urls')),
@@ -33,7 +34,9 @@ urlpatterns = [
     #/Logout/ using inbuilt logout view
     path('logout/', authentications_views.LogoutView.as_view(template_name ='users/logout.html'), name='logout'),
     #/profile/
-    path('profile/', users_view.profile_page, name='profile')
+    path('profile/', users_view.profile_page, name='profile'),
+    # path for api
+    path('api/',include('books.api.urls'))
 
 ]
 
